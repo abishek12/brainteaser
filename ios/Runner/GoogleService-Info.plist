@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>145525808765-80hmmhprlv5vqtiuivngmsrpgv99bch9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.145525808765-80hmmhprlv5vqtiuivngmsrpgv99bch9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBwlO0NZ28h9AdqLwUYSKx1zBoQG2oX0Wo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>145525808765</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.brainteaser</string>
+	<key>PROJECT_ID</key>
+	<string>brainteaser-7e346</string>
+	<key>STORAGE_BUCKET</key>
+	<string>brainteaser-7e346.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:145525808765:ios:780e504bffee130c549b14</string>
+</dict>
+</plist>

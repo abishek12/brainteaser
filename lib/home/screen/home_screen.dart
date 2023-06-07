@@ -1,3 +1,4 @@
+import 'package:brainteaser/home/widgets/create_question_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -5,75 +6,93 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) {
+                return const CreateQuestionWidget(
+                  quizId: 'asasdsad',
+                );
+              },
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
         body: SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
+          child: Column(
             children: [
-              InkWell(
-                child: reusableContainer(
-                  title: "Computer Fundamentals",
-                  icon: Icons.window,
-                ),
+              Row(
+                children: [
+                  InkWell(
+                    child: reusableContainer(
+                      title: "Computer Fundamentals",
+                      icon: Icons.window,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  reusableContainer(title: "SpreadSheet", icon: Icons.rowing),
+                ],
               ),
               const SizedBox(
-                width: 15,
+                height: 30,
               ),
-              reusableContainer(title: "SpreadSheet", icon: Icons.rowing),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            children: [
-              reusableContainer(
-                  title: "Word Processing", icon: Icons.wordpress),
+              Row(
+                children: [
+                  reusableContainer(
+                      title: "Word Processing", icon: Icons.wordpress),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  reusableContainer(title: "Database", icon: Icons.rowing),
+                ],
+              ),
               const SizedBox(
-                width: 15,
+                height: 30,
               ),
-              reusableContainer(title: "Database", icon: Icons.rowing),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            children: [
-              reusableContainer(title: "Web Design", icon: Icons.window),
+              Row(
+                children: [
+                  reusableContainer(title: "Web Design", icon: Icons.window),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  reusableContainer(
+                      title: "Cyber Security", icon: Icons.rowing),
+                ],
+              ),
               const SizedBox(
-                width: 15,
+                height: 30,
               ),
-              reusableContainer(title: "Cyber Security", icon: Icons.rowing),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            children: [
-              reusableContainer(title: "Networking", icon: Icons.window),
+              Row(
+                children: [
+                  reusableContainer(title: "Networking", icon: Icons.window),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  reusableContainer(
+                      title: "Practice Question", icon: Icons.rowing),
+                ],
+              ),
               const SizedBox(
-                width: 15,
+                height: 30,
               ),
-              reusableContainer(title: "Practice Question", icon: Icons.rowing),
+              Row(
+                children: [
+                  reusableContainer(
+                      title: "Operating Stystem", icon: Icons.window),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  reusableContainer(
+                      title: "General Knowledge", icon: Icons.rowing),
+                ],
+              ),
             ],
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            children: [
-              reusableContainer(title: "Operating Stystem", icon: Icons.window),
-              const SizedBox(
-                width: 15,
-              ),
-              reusableContainer(title: "General Knowledge", icon: Icons.rowing),
-            ],
-          ),
-        ],
-      ),
-    ));
+        ));
   }
 
   Container reusableContainer({required String title, required IconData icon}) {
