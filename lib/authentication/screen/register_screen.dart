@@ -1,4 +1,6 @@
+import 'package:brainteaser/main/screen/auth_screen_status.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../helper/register_helper.dart';
@@ -15,6 +17,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final key = GlobalKey<FormState>();
+
   final firstName = TextEditingController();
   final secondName = TextEditingController();
   final email = TextEditingController();
@@ -56,114 +60,121 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Register',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomTextField(
-                        hintText: 'Enter your Fullname',
-                        label: 'Fullname',
-                        controller: firstName,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: secondName,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your LastName',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          label: const Text(
-                            'LastName',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
-                          ),
+                  child: Form(
+                    key: key,
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Register',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: email,
-                        decoration: InputDecoration(
-                          hintText: 'Enter your Email',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          label: const Text(
-                            'Email',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
-                          ),
+                        const SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        obscureText: true,
-                        controller: password,
-                        decoration: InputDecoration(
+                        CustomTextField(
+                          hintText: 'Enter your Firstname',
+                          label: 'Firstname',
+                          controller: firstName,
+                          onValidate: (value) {
+                            if (value!.isEmpty) {
+                              return 'First name is required';
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextField(
+                          hintText: 'Enter your Lastname',
+                          label: 'Lastname',
+                          controller: secondName,
+                          onValidate: (value) {
+                            if (value!.isEmpty) {
+                              return 'Last name is required';
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextField(
+                          hintText: 'Enter your email',
+                          label: 'Email',
+                          controller: email,
+                          onValidate: (value) {
+                            if (value!.isEmpty) {
+                              return 'Email is required';
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextField(
+                          isObscureText: true,
                           hintText: 'Enter your Password',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          label: const Text(
-                            'Password',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
+                          label: 'Password',
+                          controller: password,
+                          onValidate: (value) {
+                            if (value!.isEmpty) {
+                              return 'Password is required';
+                            }
+                            if (value.length <= 8 && value.length > 15) {
+                              return 'Character should be between 8 and 15';
+                            }
+                            return null;
+                          },
+                        ),
+                        CustomTextField(
+                          isObscureText: true,
+                          hintText: 'Enter your password again',
+                          label: 'Confirm',
+                          controller: repeatPassword,
+                          onValidate: (value) {
+                            if (value != password.text) {
+                              return "Password didn't matched";
+                            }
+                            return null;
+                          },
+                        ),
+                        value.isLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : AuthCustomButton(
+                                btnText: 'Register',
+                                onTap: () {
+                                  final formField = key.currentState;
+                                  if (formField!.validate()) {
+                                    value
+                                        .checkRegister(
+                                      email.text,
+                                      password.text,
+                                      fName: firstName.text,
+                                      lName: secondName.text,
+                                    )
+                                        .then((val) {
+                                      value.isSuccess
+                                          ? Fluttertoast.showToast(
+                                              msg: 'Registration Successfull')
+                                          : Container();
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AuthScreenStatus(),
+                                        ),
+                                      );
+                                    });
+                                  }
+                                },
+                              ),
+                        AuthFooterText(
+                          txtFirst: 'Back to login',
+                          onTap: () => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Loginscreen(),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        obscureText: true,
-                        controller: repeatPassword,
-                        decoration: InputDecoration(
-                          hintText: 'Repeat your Password',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          label: const Text(
-                            'Repeat Password',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      AuthCustomButton(
-                        btnText: value.isLoading ? 'Loading' : 'Register',
-                        onTap: () {
-                          value.checkRegister(email.text, password.text);
-                        },
-                      ),
-                      AuthFooterText(
-                        txtFirst: 'Back to login',
-                        onTap: () => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Loginscreen(),
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
