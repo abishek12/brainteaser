@@ -1,113 +1,32 @@
-import 'package:brainteaser/home/widgets/create_question_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import '../services/quiz_services.dart';
+import '../widgets/home_float_btn_widget.dart';
+import '../widgets/home_ui_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    QuizServices quizServices = QuizServices();
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (context) {
-                return const CreateQuestionWidget(
-                  quizId: 'asasdsad',
-                );
-              },
+      floatingActionButton: const HomeFloatBtnWidget(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: quizServices.getQuizData(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-          child: const Icon(Icons.add),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  InkWell(
-                    child: reusableContainer(
-                      title: "Computer Fundamentals",
-                      icon: Icons.window,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  reusableContainer(title: "SpreadSheet", icon: Icons.rowing),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  reusableContainer(
-                      title: "Word Processing", icon: Icons.wordpress),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  reusableContainer(title: "Database", icon: Icons.rowing),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  reusableContainer(title: "Web Design", icon: Icons.window),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  reusableContainer(
-                      title: "Cyber Security", icon: Icons.rowing),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  reusableContainer(title: "Networking", icon: Icons.window),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  reusableContainer(
-                      title: "Practice Question", icon: Icons.rowing),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  reusableContainer(
-                      title: "Operating Stystem", icon: Icons.window),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  reusableContainer(
-                      title: "General Knowledge", icon: Icons.rowing),
-                ],
-              ),
-            ],
-          ),
-        ));
-  }
-
-  Container reusableContainer({required String title, required IconData icon}) {
-    return Container(
-      color: Colors.white,
-      width: 180,
-      height: 100,
-      child: Center(
-        child: ListTile(
-          title: Text(
-            title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          trailing: Icon(icon),
-        ),
+          }
+          return HomeUiWidget(
+            snapshot: snapshot,
+          );
+        },
       ),
     );
   }

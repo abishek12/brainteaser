@@ -17,4 +17,8 @@ class QuizServices {
   ) async {
     await _reference.doc(quizId).collection('QNA').add(questionData);
   }
+
+  getQuizData() {
+    return FirebaseFirestore.instance.collection('Quiz').snapshots();
+  }
 }
