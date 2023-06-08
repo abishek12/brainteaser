@@ -7,10 +7,6 @@ final List screenList = [
     'screen': const HomeScreen(),
   },
   {
-    'title': 'Quiz',
-    'screen': const HomeScreen(),
-  },
-  {
     'title': 'Dashboard',
     'screen': const DashboardScreen(),
   },
