@@ -13,13 +13,10 @@ class AuthScreenStatus extends StatelessWidget {
       body: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                child: Text('${snapshot.error}'),
-              );
+            if (snapshot.hasData) {
+              return const MainScreen();
             } else {
-              final user = snapshot.data;
-              return user == null ? const Loginscreen() : const MainScreen();
+              return const Loginscreen();
             }
           }),
     );

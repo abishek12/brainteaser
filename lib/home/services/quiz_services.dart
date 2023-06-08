@@ -21,4 +21,12 @@ class QuizServices {
   getQuizData() {
     return FirebaseFirestore.instance.collection('Quiz').snapshots();
   }
+
+  getQuestionData(String quizId) {
+    return FirebaseFirestore.instance
+        .collection('Quiz')
+        .doc(quizId)
+        .collection('QNA')
+        .get();
+  }
 }
