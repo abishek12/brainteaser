@@ -1,3 +1,4 @@
+import 'package:brainteaser/home/widgets/quiz_score_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -33,9 +34,24 @@ class HomeQnScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.check),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () => showDialog(
+              context: context,
+              builder: (context) => const QuizScoreWidget(),
+            ),
+            child: const Icon(Icons.sports_score),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(Icons.check),
+          ),
+        ],
       ),
     );
   }
