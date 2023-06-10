@@ -31,7 +31,7 @@ class QuizProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  providerCreateQNA(question, o1, o2, o3, o4) async {
+  providerCreateQNA(question, o1, o2, o3, o4, id) async {
     _isLoading = true;
     notifyListeners();
 
@@ -43,7 +43,7 @@ class QuizProvider extends ChangeNotifier {
       'option4': o4,
     };
 
-    await _quizServices.addQuestionData(quizData, quizId);
+    await _quizServices.addQuestionData(quizData, id);
 
     _isLoading = false;
     notifyListeners();

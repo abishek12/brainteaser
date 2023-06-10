@@ -20,6 +20,11 @@ class CustomBottomNav extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
+            icon: MyIconOutlined.quiz,
+            activeIcon: MyIcon.quiz,
+            label: 'Quiz',
+          ),
+          BottomNavigationBarItem(
             icon: MyIconOutlined.dashboard,
             activeIcon: MyIcon.dashboard,
             label: 'Dashboard',

@@ -66,37 +66,29 @@ class CreateQuizWidget extends StatelessWidget {
                         return null;
                       },
                     ),
-                    AuthCustomButton(
-                      btnText: 'Create Quiz',
-                      onTap: () {
-                        final formField = key.currentState;
-                        if (formField!.validate()) {
-                          value.providerCreateQuiz(
-                            title.text,
-                            image.text,
-                            description.text,
-                          );
-                          Fluttertoast.showToast(
-                            msg: "Quiz has been created",
-                          );
-                          Navigator.pop(context);
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return CreateQuestionWidget(
-                                quizId: value.quizId,
-                              );
-                            },
-                          );
-                        } else {
-                          value.isLoading = false;
-                        }
-                      },
-                    ),
                   ],
                 ),
               ),
         actions: [
+          AuthCustomButton(
+            btnText: 'Create Quiz',
+            onTap: () {
+              final formField = key.currentState;
+              if (formField!.validate()) {
+                value.providerCreateQuiz(
+                  title.text,
+                  image.text,
+                  description.text,
+                );
+                Fluttertoast.showToast(
+                  msg: "Quiz has been created",
+                );
+                Navigator.pop(context);
+              } else {
+                value.isLoading = false;
+              }
+            },
+          ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context),
             child: const Text('Close'),

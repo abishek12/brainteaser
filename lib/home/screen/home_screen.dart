@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../services/quiz_services.dart';
-import '../widgets/home_float_btn_widget.dart';
 import '../widgets/home_ui_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,7 +10,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     QuizServices quizServices = QuizServices();
     return Scaffold(
-      floatingActionButton: const HomeFloatBtnWidget(),
       body: StreamBuilder<QuerySnapshot>(
         stream: quizServices.getQuizData(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

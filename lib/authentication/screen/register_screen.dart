@@ -1,4 +1,5 @@
 import 'package:brainteaser/main/screen/auth_screen_status.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -153,14 +154,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           ? Fluttertoast.showToast(
                                               msg: 'Registration Successfull')
                                           : Container();
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AuthScreenStatus(),
-                                        ),
-                                      );
-                                    });
+                                    }).then((value) => {
+                                              FirebaseAuth.instance.signOut(),
+                                            });
                                   }
                                 },
                               ),

@@ -25,4 +25,8 @@ class QuizServices {
   getQuestionData(String quizId) {
     return _reference.doc(quizId).collection('QNA').snapshots();
   }
+
+  deleteQuiz(String quizId) {
+    return _reference.doc(quizId).delete();
+  }
 }

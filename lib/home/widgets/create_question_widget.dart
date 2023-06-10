@@ -105,6 +105,7 @@ class CreateQuestionWidget extends StatelessWidget {
                   option2.text,
                   option3.text,
                   option4.text,
+                  quizId,
                 );
               }
             },
