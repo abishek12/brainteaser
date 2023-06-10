@@ -28,7 +28,10 @@ class HomeQnScreen extends StatelessWidget {
             }
             if (snapshot.hasData) {
               final data = snapshot.data!.docs;
-              return QuizUi(data: data);
+              return QuizUi(
+                data: data,
+                quizId: quizId,
+              );
             }
             return const Center(
               child: CircularProgressIndicator(),

@@ -8,9 +8,11 @@ import 'quiz_list_tile.dart';
 
 class QuizUi extends StatelessWidget {
   final dynamic data;
+  final String quizId;
   const QuizUi({
     super.key,
     required this.data,
+    required this.quizId,
   });
 
   @override

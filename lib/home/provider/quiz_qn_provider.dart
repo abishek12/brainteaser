@@ -4,10 +4,12 @@ class QuizQnProvider extends ChangeNotifier {
   int _correctAns = 0;
   int _inCorrectAns = 0;
   String _selectAns = "";
+  String _quizId = "";
   bool _isCorrectAns = false;
 
   bool get isCorrectAns => _isCorrectAns;
   String get selectAns => _selectAns;
+  String get quizId => _quizId;
 
   // ticker for numbers
   int get correctAns => _correctAns;
@@ -15,6 +17,11 @@ class QuizQnProvider extends ChangeNotifier {
 
   set selectAns(String value) {
     _selectAns = value;
+    notifyListeners();
+  }
+
+  set quizId(value) {
+    _quizId = value;
     notifyListeners();
   }
 
