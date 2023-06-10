@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../authentication/widgets/auth_custom_button.dart';
 import '../../authentication/widgets/custom_text_field.dart';
 import '../provider/quiz_provider.dart';
-import 'create_question_widget.dart';
 
 class CreateQuizWidget extends StatelessWidget {
   const CreateQuizWidget({super.key});
